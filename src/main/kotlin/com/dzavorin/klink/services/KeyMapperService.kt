@@ -1,6 +1,7 @@
 package com.dzavorin.klink.services
 
 interface KeyMapperService {
+
     interface Add {
         data class Success(val key: String, val link: Any) : Add
         data class AlreadyExist(val key: String) : Add
@@ -11,6 +12,7 @@ interface KeyMapperService {
         data class NotFound(val key: String) : Get
     }
 
-    fun add(key: String, link: String): Add
+    fun add(link: String) : String
     fun getLink(key: String): Get
+
 }

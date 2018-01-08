@@ -1,25 +1,32 @@
 package com.dzavorin.klink.services
 
+import com.dzavorin.klink.model.Link
+import com.dzavorin.klink.model.repositories.LinkRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.concurrent.ConcurrentHashMap
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 class DefaultKeyMapperService : KeyMapperService {
 
-    private val map : MutableMap<String, String> = ConcurrentHashMap()
+    @Autowired lateinit var converter : KeyConverterService
 
-    override fun add(key: String, link: String): KeyMapperService.Add {
-        return if (map.containsKey(key)) {
-            KeyMapperService.Add.AlreadyExist(key)
+    @Autowired lateinit var repo : LinkRepository
+
+    @Transactional
+    override fun add(link: String): String {
+        val result = repo.getByText(link)
+        return if (result.isPresent) {
+            converter.idToKey(result.get().id)
         } else {
-            map.put(key, link)
-            KeyMapperService.Add.Success(key, link)
+            converter.idToKey(repo.save(Link(link)).id)
         }
     }
 
     override fun getLink(key: String): KeyMapperService.Get {
-        return if (map.containsKey(key)) {
-            KeyMapperService.Get.Link(map.get(key)!!)
+        val result = repo.getById(converter.keyToId(key))
+        return if (result.isPresent) {
+            KeyMapperService.Get.Link(result.get().text)
         } else {
             KeyMapperService.Get.NotFound(key)
         }

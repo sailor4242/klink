@@ -3,18 +3,20 @@ package com.dzavorin.klink.controllers
 import com.dzavorin.klink.services.KeyMapperService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-@RequestMapping("/{key}")
 class RedirectController {
 
-    @Autowired lateinit var service : KeyMapperService
+    @Autowired lateinit var service: KeyMapperService
 
-    @RequestMapping()
-    fun redirect(@PathVariable("key") key : String, response : HttpServletResponse) {
+    @GetMapping("/")
+    fun home() = "home"
+
+    @GetMapping("{key}")
+    fun redirect(@PathVariable("key") key: String, response: HttpServletResponse) {
         val result = service.getLink(key)
         when (result) {
             is KeyMapperService.Get.Link -> {
@@ -27,7 +29,7 @@ class RedirectController {
         }
     }
 
-     companion object {
-         private val HEADER_NAME = "Location"
-     }
+    companion object {
+        private val HEADER_NAME = "Location"
+    }
 }
