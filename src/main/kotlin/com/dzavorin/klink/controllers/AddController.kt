@@ -4,10 +4,11 @@ import com.dzavorin.klink.services.KeyMapperService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 
-@RestController
+@Controller
 class AddController {
 
     @Value("\${klink.prefix}")
@@ -16,6 +17,7 @@ class AddController {
     @Autowired lateinit var service : KeyMapperService
 
     @PostMapping("add")
+    @ResponseBody
     fun addRest(@RequestBody request : AddRequest) =
             ResponseEntity.ok(AddResponse(request.link, service.add(request.link)))!!
 

@@ -6,7 +6,7 @@
 	<groupId>com.dzavorin</groupId>
 	<artifactId>klink</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>klink</name>
 	<description>Kotlin project for Spring Boot</description>
@@ -164,6 +164,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

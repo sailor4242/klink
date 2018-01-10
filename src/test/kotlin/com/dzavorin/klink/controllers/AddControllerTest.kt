@@ -65,6 +65,7 @@ class AddControllerTest {
                 .param("link", LINK)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(MockMvcResultMatchers.status().isOk)
-                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(RESULT)))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(KEY)))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(LINK)))
     }
 }

@@ -68,7 +68,6 @@ class RedirectControllerTest {
                 .andExpect(status().`is`(NOT_FOUND))
     }
 
-    @Ignore
     @Test
     fun home_works_fine() {
         mockMvc.perform(get("/")).andExpect(MockMvcResultMatchers.view().name("home"))
