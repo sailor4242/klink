@@ -40,6 +40,8 @@ class AddControllerTest {
 
     private val LINK : String = "link"
 
+    private val RESULT : String = "result"
+
     @Before
     fun init() {
         MockitoAnnotations.initMocks(this)
@@ -59,11 +61,10 @@ class AddControllerTest {
     }
 
     @Test fun when_user_add_link_by_form_he_takes_a_web_page() {
-        mockMvc.perform(MockMvcRequestBuilders.post("/addtml")
+        mockMvc.perform(MockMvcRequestBuilders.post("/addhtml")
                 .param("link", LINK)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(MockMvcResultMatchers.status().isOk)
-                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(KEY)))
-                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(LINK)))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(RESULT)))
     }
 }

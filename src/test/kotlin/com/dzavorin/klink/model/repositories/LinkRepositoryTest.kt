@@ -1,8 +1,7 @@
 package com.dzavorin.klink.model.repositories
 
-import com.dzavorin.klink.KlinkApplication
+import com.dzavorin.klink.model.AbstractRepositoryTest
 import com.dzavorin.klink.model.Link
-import com.github.springtestdbunit.DbUnitTestExecutionListener
 import com.github.springtestdbunit.annotation.DatabaseOperation
 import com.github.springtestdbunit.annotation.DatabaseSetup
 import com.github.springtestdbunit.annotation.DatabaseTearDown
@@ -11,18 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.util.*
 import org.hamcrest.Matchers.*
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.runner.RunWith
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.DirtiesContext
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.TestExecutionListeners
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
-import org.springframework.test.context.junit4.SpringRunner
 
 @DatabaseSetup(LinkRepositoryTest.DATASET)
 @DatabaseTearDown(type = DatabaseOperation.DELETE_ALL, value = LinkRepositoryTest.DATASET)
-open class LinkRepositoryTest {
+class LinkRepositoryTest : AbstractRepositoryTest() {
 
     @Autowired lateinit var repository : LinkRepository
 
