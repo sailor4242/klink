@@ -11,7 +11,6 @@ env:
   global:
     - COMMIT=${TRAVIS_COMMIT::7}
 
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 #  - docker login -u $D_USER -p $D_PASS
