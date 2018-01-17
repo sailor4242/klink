@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar webapp/target/klink.war
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar webapp/target/*.jar
